@@ -45,6 +45,20 @@ const projects = [
         ]
     },
 
+    {
+        title: "Indel Money – NBFC Financial Services Platform",
+        period: "04/2025 - 06/2025",
+        description: "Digital platform for a leading non-banking financial company in India. Showcased loan products, integrated real-time gold rates, and added tools like a loan calculator, careers portal, and online loan enquiry system to enhance customer engagement and lead generation.",
+        tech: ["Next.js", "Node.js", "Express.js", "PostgreSQL", "Sequelize", "Redux", "Redux Thunk"],
+        links: {
+            demo: "https://indelmoney.com",
+            github: "#"
+        },
+        highlights: [
+            "Showcased loan products, integrated real-time gold rates, and added tools like a loan calculator, careers portal, and online loan enquiry system to enhance customer engagement and lead generation."
+        ]
+    },
+
 ];
 
 export function Projects() {
