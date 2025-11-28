@@ -93,8 +93,8 @@ export function Contact() {
                             </div>
                             <div>
                                 <h4 className="font-semibold mb-1">Email</h4>
-                                <a href="mailto:vaishnav@example.com" className="text-muted-foreground hover:text-primary transition-colors">
-                                    vaishnav@example.com
+                                <a href="mailto:vaishnavtdy@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">
+                                    vaishnavtdy@gmail.com
                                 </a>
                             </div>
                         </div>
@@ -105,8 +105,8 @@ export function Contact() {
                             </div>
                             <div>
                                 <h4 className="font-semibold mb-1">Phone</h4>
-                                <a href="tel:+911234567890" className="text-muted-foreground hover:text-primary transition-colors">
-                                    +91 1234 567 890
+                                <a href="tel:+918111898821" className="text-muted-foreground hover:text-primary transition-colors">
+                                    +91 8111898821
                                 </a>
                             </div>
                         </div>
@@ -117,8 +117,8 @@ export function Contact() {
                             </div>
                             <div>
                                 <h4 className="font-semibold mb-1">LinkedIn</h4>
-                                <a href="https://linkedin.com/in/vaishnav" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
-                                    linkedin.com/in/vaishnav
+                                <a href="https://www.linkedin.com/in/vaishnav-vijayan-9312aa198/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                                    linkedin.com/in/vaishnav-vijayan-9312aa198
                                 </a>
                             </div>
                         </div>

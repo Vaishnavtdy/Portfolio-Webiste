@@ -39,7 +39,7 @@ export function Education() {
                                 Active member of the coding club and participated in multiple hackathons.
                             </p>
                             <div className="inline-block px-4 py-1 bg-secondary rounded-full text-sm font-medium">
-                                2017 - 2021
+                                2016 - 2020
                             </div>
                         </div>
                     </motion.div>

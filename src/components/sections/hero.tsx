@@ -86,7 +86,7 @@ export function Hero() {
     return (
         <section
             ref={containerRef}
-            className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-gradient-to-b from-background via-background to-background/95"
+            className="relative h-screen flex items-center justify-center overflow-hidden pt-20 bg-gradient-to-b from-background via-background to-background/95"
         >
             {/* Interactive Mouse Orb */}
             <div
@@ -123,21 +123,21 @@ export function Hero() {
             <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
 
             <div className="container mx-auto px-4 md:px-6 text-center z-10 max-w-4xl">
-                <div ref={badgeRef} className="opacity-0 mb-4">
-                    <span className="text-sm md:text-base text-muted-foreground">
+                <div ref={badgeRef} className="opacity-0 mb-2">
+                    <span className="text-xs md:text-sm text-muted-foreground">
                         Hi, I&apos;m
                     </span>
                 </div>
 
                 <h1
                     ref={titleRef}
-                    className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 opacity-0"
+                    className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4 opacity-0"
                 >
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-400 to-purple-500">
                         Vaishnav Vijayan
                     </span>
                     <br />
-                    <span className="text-primary text-3xl md:text-4xl lg:text-5xl">
+                    <span className="text-primary text-2xl md:text-3xl lg:text-4xl">
                         <TypeAnimation
                             sequence={[
                                 "Full Stack Developer",
@@ -163,7 +163,7 @@ export function Hero() {
 
                 <p
                     ref={subtitleRef}
-                    className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-10 opacity-0 leading-relaxed"
+                    className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto mb-6 opacity-0 leading-relaxed"
                 >
                     Software Developer with 3+ years of experience building secure,
                     scalable Full Stack applications and microservices. Passionate about
@@ -172,23 +172,23 @@ export function Hero() {
 
                 <div
                     ref={buttonsRef}
-                    className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 opacity-0"
+                    className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6 opacity-0"
                 >
                     <a
                         href="#contact"
-                        className="px-8 py-3 rounded-full bg-gradient-to-r from-primary via-blue-500 to-purple-500 text-white font-medium hover:opacity-90 transition-opacity flex items-center gap-2 w-full sm:w-auto justify-center shadow-lg shadow-primary/50"
+                        className="px-6 py-2.5 text-sm rounded-full bg-gradient-to-r from-primary via-blue-500 to-purple-500 text-white font-medium hover:opacity-90 transition-opacity flex items-center gap-2 w-full sm:w-auto justify-center shadow-lg shadow-primary/50"
                     >
-                        Get in Touch <ArrowRight size={18} />
+                        Get in Touch <ArrowRight size={16} />
                     </a>
                     <a
                         href="#projects"
-                        className="px-8 py-3 rounded-full border-2 border-primary text-primary font-medium hover:bg-primary hover:text-primary-foreground transition-all flex items-center gap-2 w-full sm:w-auto justify-center"
+                        className="px-6 py-2.5 text-sm rounded-full border-2 border-primary text-primary font-medium hover:bg-primary hover:text-primary-foreground transition-all flex items-center gap-2 w-full sm:w-auto justify-center"
                     >
                         View My Work
                     </a>
                 </div>
 
-                <div ref={socialRef} className="opacity-0 flex flex-col items-center gap-6">
+                <div ref={socialRef} className="opacity-0 flex flex-col items-center gap-4">
                     <SocialIcons />
                     {/* <div className="flex items-center gap-2 text-sm text-muted-foreground"> */}
                     {/* <MapPin size={16} /> */}

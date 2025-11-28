@@ -7,31 +7,44 @@ import { ExternalLink, Github, Folder } from "lucide-react";
 const projects = [
     {
         title: "B2B Marketplace Platform",
-        description: "A comprehensive B2B marketplace connecting suppliers and buyers. Features include real-time messaging, order tracking, and secure payments.",
-        tech: ["Next.js", "Nest.js", "AWS", "PostgreSQL"],
+        period: "08/2025 - Present",
+        description: "A full-stack platform connecting buyers and suppliers with RFQs & chat features. Built scalable architecture supporting secure authentication and media management with role-based dashboards.",
+        tech: ["Next.js", "Nest.js", "PostgreSQL", "Sequelize", "AWS Cognito", "S3", "API Gateway"],
         links: {
             demo: "#",
             github: "#"
-        }
+        },
+        highlights: [
+            "Implemented role-based dashboards for buyers/sellers and streamlined RFQ workflows"
+        ]
     },
     {
-        title: "The Top Player",
-        description: "Sports training platform for athletes to track performance, schedule sessions, and connect with coaches.",
-        tech: ["Next.js", "Express.js", "MongoDB", "Socket.io"],
+        title: "The Top Player – Football & Fitness Platform",
+        period: "02/2025 - 06/2025",
+        description: "Online training platform for players and coaches in the Middle East. Developed admin dashboard for performance insights and course management.",
+        tech: ["Next.js", "Node.js", "Express.js", "PostgreSQL", "Sequelize", "Redux", "Redux Thunk"],
         links: {
-            demo: "#",
+            demo: "https://www.thetopplayer.com/en",
             github: "#"
-        }
+        },
+        highlights: [
+            "Built comprehensive admin dashboard for performance tracking and course management"
+        ]
     },
     {
-        title: "YangWang",
-        description: "Premium automotive digital platform showcasing luxury vehicles with immersive 3D experiences and configurators.",
-        tech: ["Next.js", "Three.js", "Tailwind CSS", "Strapi"],
+        title: "YangWang – Digital Brand Platform",
+        period: "04/2025 - 06/2025",
+        description: "Created an elegant platform for a premium automotive brand. Designed car model showcase, online booking, and newsletter integration improving engagement.",
+        tech: ["Next.js", "API Integration"],
         links: {
-            demo: "#",
+            demo: "https://yangwang-next.netlify.app/",
             github: "#"
-        }
-    }
+        },
+        highlights: [
+            "Designed car model showcase and booking system for premium automotive brand"
+        ]
+    },
+
 ];
 
 export function Projects() {
