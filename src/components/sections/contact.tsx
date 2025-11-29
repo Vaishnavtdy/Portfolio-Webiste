@@ -37,14 +37,32 @@ export function Contact() {
         setIsSubmitting(true);
         setErrors({});
 
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1500));
+        try {
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
 
-        setIsSubmitting(false);
-        setIsSuccess(true);
-        setFormData({ name: "", email: "", message: "" });
+            const data = await response.json();
 
-        setTimeout(() => setIsSuccess(false), 5000);
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to send email');
+            }
+
+            setIsSuccess(true);
+            setFormData({ name: "", email: "", message: "" });
+            setTimeout(() => setIsSuccess(false), 5000);
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            setErrors({
+                submit: error instanceof Error ? error.message : 'Failed to send message. Please try again.'
+            });
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -200,6 +218,16 @@ export function Contact() {
                                     className="p-4 bg-green-500/10 text-green-500 rounded-lg text-center text-sm font-medium"
                                 >
                                     Message sent successfully! I&apos;ll get back to you soon.
+                                </motion.div>
+                            )}
+
+                            {errors.submit && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="p-4 bg-red-500/10 text-red-500 rounded-lg text-center text-sm font-medium"
+                                >
+                                    {errors.submit}
                                 </motion.div>
                             )}
                         </form>
