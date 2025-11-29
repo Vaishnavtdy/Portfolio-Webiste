@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { TypeAnimation } from "react-type-animation";
 import { SocialIcons } from "@/components/ui/social-icons";
+import { ThreeScene } from "@/components/ThreeScene";
 
 export function Hero() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -99,6 +100,12 @@ export function Hero() {
                     transform: 'translate(-50%, -50%)',
                 }}
             />
+
+            {/* 3D Scene */}
+            <div className="absolute inset-0 opacity-60 pointer-events-none">
+                <ThreeScene />
+            </div>
+
 
             {/* Particle Background */}
             <div className="absolute inset-0 -z-10 particles">
