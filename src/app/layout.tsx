@@ -6,6 +6,8 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import SmoothScroll from "@/components/SmoothScroll";
 
+import { CustomCursor } from "@/components/ui/custom-cursor";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -37,6 +39,7 @@ export default function RootLayout({
           defaultTheme="dark"
           storageKey="portfolio-theme"
         >
+          <CustomCursor />
           <SmoothScroll />
           <Navbar />
           <main className="min-h-screen">

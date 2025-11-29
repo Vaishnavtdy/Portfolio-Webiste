@@ -95,6 +95,13 @@ body {
   min-height: 100vh;
 }
 
+/* Hide default cursor on desktop */
+@media (min-width: 768px) {
+  * {
+    cursor: none !important;
+  }
+}
+
 /* Prevent white flash on scroll */
 html,
 body,
