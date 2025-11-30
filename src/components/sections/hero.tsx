@@ -153,10 +153,6 @@ export function Hero() {
                                 2000,
                                 "Frontend Developer",
                                 2000,
-                                "React & Next.js Expert",
-                                2000,
-                                "Node.js Specialist",
-                                2000,
                             ]}
                             wrapper="span"
                             speed={50}
