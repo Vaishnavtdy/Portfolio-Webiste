@@ -11,7 +11,7 @@ export function ThemeToggle() {
     return (
         <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="relative p-2 rounded-full hover:bg-accent transition-colors"
+            className="relative w-10 h-10 rounded-full hover:bg-accent transition-colors flex items-center justify-center"
             aria-label="Toggle theme"
         >
             <motion.div
@@ -35,12 +35,10 @@ export function ThemeToggle() {
                     rotate: theme === "light" ? 0 : -90,
                 }}
                 transition={{ duration: 0.2 }}
-                className="flex items-center justify-center"
+                className="absolute inset-0 flex items-center justify-center"
             >
                 <Sun className="h-5 w-5 text-foreground" />
             </motion.div>
-            {/* Spacer to maintain size since absolute positioning is used */}
-            <div className="w-5 h-5" />
         </button>
     );
 }

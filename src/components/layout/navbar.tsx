@@ -46,9 +46,9 @@ export function Navbar() {
                     <Image
                         src="/logo.png"
                         alt="Vaishnav Portfolio Logo"
-                        width={150}
-                        height={150}
-                        className="h-16 w-auto md:h-18 object-contain logo-transparent"
+                        width={100}
+                        height={100}
+                        className="h-9 w-auto md:h-10 object-contain logo-transparent"
                         style={{ background: 'transparent' }}
                         priority
                     />

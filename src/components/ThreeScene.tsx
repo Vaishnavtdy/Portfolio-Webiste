@@ -4,6 +4,7 @@ import React, { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Line, Sphere } from "@react-three/drei";
 import * as THREE from "three";
+import { useTheme } from "@/components/theme-provider";
 
 // Wireframe Tech Shape Component
 function TechShape({
@@ -63,7 +64,7 @@ function TechShape({
 }
 
 // Binary/Tech Particles
-function TechParticles() {
+function TechParticles({ isDark = true }: { isDark?: boolean }) {
     const particlesRef = useRef<THREE.Points>(null);
 
     const { positions, colors } = useMemo(() => {
@@ -71,8 +72,8 @@ function TechParticles() {
         const positions = new Float32Array(count * 3);
         const colors = new Float32Array(count * 3);
 
-        const color1 = new THREE.Color("#00d9ff");
-        const color2 = new THREE.Color("#8b5cf6");
+        const color1 = new THREE.Color(isDark ? "#00d9ff" : "#0891b2");
+        const color2 = new THREE.Color(isDark ? "#8b5cf6" : "#7c3aed");
 
         for (let i = 0; i < count; i++) {
             positions[i * 3] = (Math.random() - 0.5) * 15;
@@ -86,7 +87,7 @@ function TechParticles() {
         }
 
         return { positions, colors };
-    }, []);
+    }, [isDark]);
 
     useFrame((state) => {
         if (particlesRef.current) {
@@ -125,7 +126,7 @@ function TechParticles() {
 }
 
 // Circuit Board Lines
-function CircuitLines({ lineWidth = 1.5 }: { lineWidth?: number }) {
+function CircuitLines({ lineWidth = 1.5, isDark = true }: { lineWidth?: number; isDark?: boolean }) {
     const linesRef = useRef<THREE.Group>(null);
 
     useFrame((state) => {
@@ -149,7 +150,7 @@ function CircuitLines({ lineWidth = 1.5 }: { lineWidth?: number }) {
                 <Line
                     key={i}
                     points={points as any}
-                    color={i % 2 === 0 ? "#00d9ff" : "#8b5cf6"}
+                    color={i % 2 === 0 ? (isDark ? "#00d9ff" : "#0891b2") : (isDark ? "#8b5cf6" : "#7c3aed")}
                     lineWidth={lineWidth}
                     transparent
                     opacity={0.4}
@@ -160,7 +161,7 @@ function CircuitLines({ lineWidth = 1.5 }: { lineWidth?: number }) {
 }
 
 // Glowing Nodes (connection points)
-function GlowingNodes() {
+function GlowingNodes({ isDark = true }: { isDark?: boolean }) {
     const positions: [number, number, number][] = useMemo(() => [
         [-3, 2, 0],
         [3, -2, 0],
@@ -174,12 +175,12 @@ function GlowingNodes() {
             {positions.map((pos, i) => (
                 <Float key={i} speed={3} floatIntensity={0.5}>
                     <Sphere args={[0.1, 16, 16]} position={pos}>
-                        <meshBasicMaterial color={i % 2 === 0 ? "#00d9ff" : "#8b5cf6"} />
+                        <meshBasicMaterial color={i % 2 === 0 ? (isDark ? "#00d9ff" : "#0891b2") : (isDark ? "#8b5cf6" : "#7c3aed")} />
                     </Sphere>
                     {/* Glow effect */}
                     <Sphere args={[0.15, 16, 16]} position={pos}>
                         <meshBasicMaterial
-                            color={i % 2 === 0 ? "#00d9ff" : "#8b5cf6"}
+                            color={i % 2 === 0 ? (isDark ? "#00d9ff" : "#0891b2") : (isDark ? "#8b5cf6" : "#7c3aed")}
                             transparent
                             opacity={0.2}
                         />
@@ -191,7 +192,7 @@ function GlowingNodes() {
 }
 
 // Main Scene Component
-function Scene() {
+function Scene({ isDark = true }: { isDark?: boolean }) {
     const groupRef = useRef<THREE.Group>(null);
     const [lineWidth, setLineWidth] = useState(1.5);
 
@@ -233,20 +234,20 @@ function Scene() {
     return (
         <group ref={groupRef}>
             {/* Tech Wireframe Shapes */}
-            <TechShape position={[-2.5, 1.5, -1]} geometry="box" color="#00d9ff" />
-            <TechShape position={[2.5, -1, -2]} geometry="octahedron" color="#8b5cf6" />
-            <TechShape position={[0, 2.5, -1.5]} geometry="tetrahedron" color="#3b82f6" />
-            <TechShape position={[-1.5, -1.8, 0.5]} geometry="torus" color="#06b6d4" />
-            <TechShape position={[2, 1.2, 0]} geometry="sphere" color="#a855f7" />
+            <TechShape position={[-2.5, 1.5, -1]} geometry="box" color={isDark ? "#00d9ff" : "#0891b2"} />
+            <TechShape position={[2.5, -1, -2]} geometry="octahedron" color={isDark ? "#8b5cf6" : "#7c3aed"} />
+            <TechShape position={[0, 2.5, -1.5]} geometry="tetrahedron" color={isDark ? "#3b82f6" : "#2563eb"} />
+            <TechShape position={[-1.5, -1.8, 0.5]} geometry="torus" color={isDark ? "#06b6d4" : "#0891b2"} />
+            <TechShape position={[2, 1.2, 0]} geometry="sphere" color={isDark ? "#a855f7" : "#9333ea"} />
 
             {/* Circuit Lines */}
-            <CircuitLines lineWidth={lineWidth} />
+            <CircuitLines lineWidth={lineWidth} isDark={isDark} />
 
             {/* Glowing Connection Nodes */}
-            <GlowingNodes />
+            <GlowingNodes isDark={isDark} />
 
             {/* Tech Particles */}
-            <TechParticles />
+            <TechParticles isDark={isDark} />
 
             {/* Lighting */}
             <ambientLight intensity={0.3} />
@@ -282,7 +283,19 @@ function LoadingIndicator() {
 
 // Main ThreeScene Component
 export function ThreeScene() {
+    const { theme } = useTheme();
+    const [isDark, setIsDark] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        if (theme === 'system') {
+            if (typeof window !== 'undefined') {
+                setIsDark(window.matchMedia('(prefers-color-scheme: dark)').matches);
+            }
+        } else {
+            setIsDark(theme === 'dark');
+        }
+    }, [theme]);
 
     useEffect(() => {
         // Simulate loading time for 3D scene initialization
@@ -306,7 +319,7 @@ export function ThreeScene() {
                     }}
                     dpr={[1, 2]}
                 >
-                    <Scene />
+                    <Scene isDark={isDark} />
                 </Canvas>
             </div>
         </div>

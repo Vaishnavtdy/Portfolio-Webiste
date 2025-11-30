@@ -29,7 +29,8 @@
 }
 
 html {
-  background-color: #0a0a0f;
+  background-color: var(--background);
+  transition: background-color 0.3s ease;
 }
 
 :root {
@@ -65,8 +66,8 @@ html {
   --background: #ffffff;
   --foreground: #09090b;
 
-  --primary: #00D9FF;
-  /* Cyan */
+  --primary: #0891b2;
+  /* Darker Cyan for better contrast on white */
   --primary-foreground: #ffffff;
 
   --secondary: #f4f4f5;
@@ -84,7 +85,7 @@ html {
 
   --border: #e4e4e7;
   --input: #e4e4e7;
-  --ring: #00D9FF;
+  --ring: #0891b2;
 }
 
 body {
@@ -102,11 +103,11 @@ body {
   }
 }
 
-/* Prevent white flash on scroll */
+/* Prevent flash on scroll */
 html,
 body,
 #__next {
-  background-color: #0a0a0f;
+  background-color: var(--background);
 }
 
 /* Custom Scrollbar */
