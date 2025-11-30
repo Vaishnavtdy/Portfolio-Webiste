@@ -306,18 +306,37 @@ export function ThreeScene() {
         return () => clearTimeout(timer);
     }, []);
 
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [isInView, setIsInView] = useState(true);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsInView(entry.isIntersecting);
+            },
+            { threshold: 0.1 }
+        );
+
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <div className="absolute inset-0 w-full h-full">
+        <div ref={containerRef} className="absolute inset-0 w-full h-full">
             {isLoading && <LoadingIndicator />}
             <div className={`w-full h-full transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
                 <Canvas
+                    frameloop={isInView ? "always" : "never"}
                     camera={{ position: [0, 0, 10], fov: 50 }}
                     gl={{
                         antialias: true,
                         alpha: true,
                         powerPreference: "high-performance"
                     }}
-                    dpr={[1, 2]}
+                    dpr={[1, 1.5]}
                 >
                     <Scene isDark={isDark} />
                 </Canvas>

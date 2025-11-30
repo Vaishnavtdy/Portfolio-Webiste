@@ -17,8 +17,8 @@ export function Hero() {
     const socialRef = useRef<HTMLDivElement>(null);
     const mouseOrbRef = useRef<HTMLDivElement>(null);
 
-    // Mouse position state for interactive background
-    const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
+    // Mouse position ref for interactive background (performance optimization)
+    const requestRef = useRef<number | null>(null);
 
     // Generate particle data once using useState lazy initializer
     const [particles] = useState(() =>
@@ -35,16 +35,26 @@ export function Hero() {
     // Track mouse movement for interactive background
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
-            if (containerRef.current) {
-                const rect = containerRef.current.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                const y = ((e.clientY - rect.top) / rect.height) * 100;
-                setMousePosition({ x, y });
-            }
+            if (requestRef.current) return;
+
+            requestRef.current = requestAnimationFrame(() => {
+                if (containerRef.current && mouseOrbRef.current) {
+                    const rect = containerRef.current.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+                    mouseOrbRef.current.style.left = `${x}%`;
+                    mouseOrbRef.current.style.top = `${y}%`;
+                }
+                requestRef.current = null;
+            });
         };
 
         window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            if (requestRef.current) cancelAnimationFrame(requestRef.current);
+        };
     }, []);
 
     useGSAP(
@@ -95,8 +105,8 @@ export function Hero() {
                 className="absolute w-96 h-96 rounded-full pointer-events-none transition-all duration-300 ease-out opacity-30 blur-3xl"
                 style={{
                     background: 'radial-gradient(circle, rgba(0, 217, 255, 0.4) 0%, rgba(139, 92, 246, 0.2) 50%, transparent 70%)',
-                    left: `${mousePosition.x}%`,
-                    top: `${mousePosition.y}%`,
+                    left: '50%',
+                    top: '50%',
                     transform: 'translate(-50%, -50%)',
                 }}
             />
