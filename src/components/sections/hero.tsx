@@ -87,7 +87,7 @@ export function Hero() {
     return (
         <section
             ref={containerRef}
-            className="relative h-screen flex items-center justify-center overflow-hidden pt-20 bg-gradient-to-b from-background via-background to-background/95"
+            className="relative h-[100dvh] min-h-[600px] flex items-center justify-center overflow-hidden pt-20 bg-gradient-to-b from-background via-background to-background/95"
         >
             {/* Interactive Mouse Orb */}
             <div
