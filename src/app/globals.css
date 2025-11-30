@@ -158,6 +158,20 @@ body,
   animation-delay: 4s;
 }
 
+@keyframes spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-spin-reverse {
+  animation: spin-reverse 1s linear infinite;
+}
+
 /* TypeAnimation cursor fix for gradient text */
 .type-animation-cursor::after {
   content: '|';

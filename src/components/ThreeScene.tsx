@@ -257,21 +257,58 @@ function Scene() {
     );
 }
 
+// Loading Component
+function LoadingIndicator() {
+    return (
+        <div className="absolute inset-0 flex items-center justify-center">
+            <div className="relative">
+                {/* Outer rotating ring */}
+                <div className="w-20 h-20 rounded-full border-4 border-transparent border-t-cyan-400 border-r-purple-500 animate-spin"></div>
+
+                {/* Middle rotating ring (opposite direction) */}
+                <div className="absolute inset-0 w-20 h-20 rounded-full border-4 border-transparent border-b-cyan-400 border-l-purple-500 animate-spin-reverse"></div>
+
+                {/* Inner pulsing dot */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-3 h-3 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 animate-pulse"></div>
+                </div>
+
+                {/* Glow effect */}
+                <div className="absolute inset-0 w-20 h-20 rounded-full bg-gradient-to-r from-cyan-400/20 to-purple-500/20 blur-xl animate-pulse"></div>
+            </div>
+        </div>
+    );
+}
+
 // Main ThreeScene Component
 export function ThreeScene() {
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        // Simulate loading time for 3D scene initialization
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 1500);
+
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <div className="absolute inset-0 w-full h-full">
-            <Canvas
-                camera={{ position: [0, 0, 10], fov: 50 }}
-                gl={{
-                    antialias: true,
-                    alpha: true,
-                    powerPreference: "high-performance"
-                }}
-                dpr={[1, 2]}
-            >
-                <Scene />
-            </Canvas>
+            {isLoading && <LoadingIndicator />}
+            <div className={`w-full h-full transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
+                <Canvas
+                    camera={{ position: [0, 0, 10], fov: 50 }}
+                    gl={{
+                        antialias: true,
+                        alpha: true,
+                        powerPreference: "high-performance"
+                    }}
+                    dpr={[1, 2]}
+                >
+                    <Scene />
+                </Canvas>
+            </div>
         </div>
     );
 }
