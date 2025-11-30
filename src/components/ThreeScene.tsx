@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useMemo } from "react";
+import React, { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Line, Sphere } from "@react-three/drei";
 import * as THREE from "three";
@@ -55,7 +55,7 @@ function TechShape({
                 {/* Glowing edges */}
                 <lineSegments ref={edgesRef}>
                     {geometryComponent}
-                    <lineBasicMaterial color={color} linewidth={2} />
+                    <lineBasicMaterial color={color} />
                 </lineSegments>
             </group>
         </Float>
@@ -125,7 +125,7 @@ function TechParticles() {
 }
 
 // Circuit Board Lines
-function CircuitLines() {
+function CircuitLines({ lineWidth = 1.5 }: { lineWidth?: number }) {
     const linesRef = useRef<THREE.Group>(null);
 
     useFrame((state) => {
@@ -150,7 +150,7 @@ function CircuitLines() {
                     key={i}
                     points={points as any}
                     color={i % 2 === 0 ? "#00d9ff" : "#8b5cf6"}
-                    lineWidth={1.5}
+                    lineWidth={lineWidth}
                     transparent
                     opacity={0.4}
                 />
@@ -193,6 +193,23 @@ function GlowingNodes() {
 // Main Scene Component
 function Scene() {
     const groupRef = useRef<THREE.Group>(null);
+    const [lineWidth, setLineWidth] = useState(1.5);
+
+    useEffect(() => {
+        const handleResize = () => {
+            // Use smaller line width on mobile devices
+            setLineWidth(window.innerWidth < 768 ? 0.5 : 1.5);
+        };
+
+        // Set initial value
+        handleResize();
+
+        // Add event listener
+        window.addEventListener('resize', handleResize);
+
+        // Cleanup
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     useFrame((state) => {
         if (groupRef.current) {
@@ -223,7 +240,7 @@ function Scene() {
             <TechShape position={[2, 1.2, 0]} geometry="sphere" color="#a855f7" />
 
             {/* Circuit Lines */}
-            <CircuitLines />
+            <CircuitLines lineWidth={lineWidth} />
 
             {/* Glowing Connection Nodes */}
             <GlowingNodes />
