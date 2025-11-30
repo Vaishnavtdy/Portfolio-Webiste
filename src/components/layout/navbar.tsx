@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -40,9 +41,17 @@ export function Navbar() {
             <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
                 <Link
                     href="/"
-                    className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-400"
+                    className="relative flex items-center transition-transform hover:scale-105"
                 >
-                    Vaishnav<span className="text-foreground">.dev</span>
+                    <Image
+                        src="/logo.png"
+                        alt="Vaishnav Portfolio Logo"
+                        width={150}
+                        height={150}
+                        className="h-16 w-auto md:h-18 object-contain logo-transparent"
+                        style={{ background: 'transparent' }}
+                        priority
+                    />
                 </Link>
 
                 {/* Desktop Navigation */}
